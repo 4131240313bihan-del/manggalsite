@@ -68,7 +68,7 @@
       background:
         linear-gradient(180deg, rgba(90,3,3,0.18), rgba(155,31,31,0.08)),
         url("Assets/hero.jpg") center/cover no-repeat;
-      color:#fff;box-shadow:var(--shadow-strong);position:relative;
+      color:#1a1919;box-shadow:var(--shadow-strong);position:relative;
     }
 
     /* decorative, symbolic corner */
@@ -80,13 +80,13 @@
 
     .hero-left{padding-right:6px}
     .hero h1{font-family:"Merriweather",serif;font-size:2.4rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
-    .hero p{opacity:.95;color:rgba(255,255,255,0.92);margin-bottom:14px;max-width:56ch}
+    .hero p{opacity:.95;color:rgba(77, 73, 73, 0.92);margin-bottom:14px;max-width:56ch}
 
     .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
     .btn{
       display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;font-weight:700;border:0;cursor:pointer;transition:transform .18s var(--ease),box-shadow .18s var(--ease);
     }
-    .btn-light{background:rgba(255,255,255,0.12);color:#fff}
+    .btn-light{background:rgba(255,255,255,0.12);color:#5d5858}
     .btn-gold{background:var(--gold);color:var(--crimson-900)}
     .btn:active{transform:translateY(1px)}
     .btn:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,0.16)}
@@ -101,7 +101,7 @@
       cursor:grab;
     }
     .emblem .disc{
-      width:84%;height:84%;border-radius:50%;overflow:hidden;background:#fff;display:grid;place-items:center;position:relative;z-index:3;
+      width:84%;height:84%;border-radius:50%;overflow:hidden;background:#4a424200;display:grid;place-items:center;position:relative;z-index:3;
       box-shadow: 0 8px 30px rgba(0,0,0,0.2);
       transform:translateZ(24px);
     }
@@ -167,9 +167,9 @@
     .card .reveal p{font-size:.95rem;max-width:38ch}
 
     /* APPLY background images to cards */
-    #MKN .bg{background-image:url("Assets/ProfilMKN.jpg")}
-    #ASP .bg{background-image:url("Assets/ProfilASP.jpg")}
-    #MAP .bg{background-image:url("Assets/ProfilMAP.jpg")}
+    #MKN .bg{background-image:url("https://i.ibb.co.com/RGf6gZmN/Profil-MKN.jpg")}
+    #ASP .bg{background-image:url("https://i.ibb.co.com/671yBSkW/Profil-ASP.jpg")}
+    #MAP .bg{background-image:url("https://i.ibb.co.com/xtRM9gRz/Profil-MAP.jpg")}
 
     /* --------------------------
        STATS - circular counters
@@ -222,7 +222,7 @@
     <!-- NAV -->
     <header class="nav" role="banner" aria-label="Main">
       <div class="brand">
-        <img src="Assets/logomanggala.jpg" alt="Manggala logo">
+        <img src="https://i.ibb.co.com/MDWB6Spb/logomanggala.jpg" alt="Manggala logo">
         <div>
           <div class="title">Manggala Angkatan</div>
           <div style="font-size:12px;opacity:.95">Class of 24</div>
@@ -260,7 +260,7 @@
       <div class="emblem-wrap" aria-hidden="false">
         <div class="emblem" id="emblem" tabindex="0" aria-label="Simbol Manggala (interaktif)">
           <div class="disc" role="img" aria-label="Logomanggala">
-            <img src="Assets/logomanggala.jpg" alt="Simbol Manggala">
+            <img src="https://i.ibb.co.com/MDWB6Spb/logomanggala.jpg" alt="Simbol Manggala">
           </div>
           <!-- SVG ring -->
           <svg viewBox="0 0 220 220" aria-hidden="true" focusable="false">
@@ -268,7 +268,6 @@
             <circle cx="110" cy="110" r="70" stroke="rgba(255,255,255,0.06)" stroke-width="1" fill="none"></circle>
           </svg>
         </div>
-        <div class="emblem-caption">Simbol Harimau Melingkar — keberanian & kebersamaan</div>
       </div>
     </main>
 
@@ -290,7 +289,6 @@
 
           <div class="info">
             <h3>Manajemen Keuangan</h3>
-            <p class="muted">Pengumuman & administrasi biaya</p>
             <div class="actions">
               <span class="chip">Info</span>
               <button class="btn btn-light open-detail" aria-haspopup="true" aria-expanded="false">Buka</button>
@@ -299,7 +297,6 @@
 
           <div class="reveal" aria-hidden="true">
             <h3>Manajemen Keuangan Negara</h3>
-            <p>Pusat pengumuman akademik & panduan administrasi. Klik "Buka" untuk dokumen, pengumuman dan form.</p>
             <div style="display:flex;gap:8px">
               <button class="btn btn-gold" data-action="open" data-target="MKN">Buka Layanan</button>
               <button class="btn btn-light" data-action="download">Dokumen</button>
@@ -316,7 +313,6 @@
 
           <div class="info">
             <h3>Akuntansi Publik</h3>
-            <p class="muted">Saluran komunikasi & forum</p>
             <div class="actions">
               <span class="chip">Komunikasi</span>
               <button class="btn btn-light open-detail" aria-haspopup="true" aria-expanded="false">Buka</button>
@@ -325,10 +321,9 @@
 
           <div class="reveal" aria-hidden="true">
             <h3>Akuntansi Sektor Publik</h3>
-            <p>Forum resmi, kanal diskusi, dan log aktivitas. Tersedia channel pendaftaran & arsip.</p>
             <div style="display:flex;gap:8px">
-              <button class="btn btn-gold" data-action="open" data-target="ASP">Masuk Channel</button>
-              <button class="btn btn-light" data-action="docs">Unduh</button>
+              <button class="btn btn-gold" data-action="open" data-target="MKN">Buka Layanan</button>
+              <button class="btn btn-light" data-action="download">Dokumen</button>
             </div>
           </div>
         </article>
@@ -342,7 +337,6 @@
 
           <div class="info">
             <h3>Manajemen Aset</h3>
-            <p class="muted">Inventaris & logistik</p>
             <div class="actions">
               <span class="chip">Pelayanan</span>
               <button class="btn btn-light open-detail" aria-haspopup="true" aria-expanded="false">Buka</button>
@@ -351,10 +345,9 @@
 
           <div class="reveal" aria-hidden="true">
             <h3>Manajemen Aset Publik</h3>
-            <p>Inventaris, permintaan logistik, dan dukungan administrasi untuk kegiatan angkatan.</p>
             <div style="display:flex;gap:8px">
-              <button class="btn btn-gold" data-action="open" data-target="MAP">Ajukan Permintaan</button>
-              <button class="btn btn-light" data-action="forms">Form</button>
+             <button class="btn btn-gold" data-action="open" data-target="MKN">Buka Layanan</button>
+              <button class="btn btn-light" data-action="download">Dokumen</button>
             </div>
           </div>
         </article>
@@ -467,7 +460,7 @@
       </div>
       <aside class="right" style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center">
         <div style="width:160px;height:160px;border-radius:160px;background:rgba(255,255,255,0.06);display:grid;place-items:center">
-          <img src="Assets/logomanggala.jpg" alt="logo" style="width:88px">
+          <img src="https://drive.google.com/file/d/1EKIFT6-yXr36IoVA7kdSbWlB4ShZMBEC/view?usp=drive_link" alt="logo" style="width:88px">
         </div>
         <p style="opacity:.9;margin-top:10px;color:#fff">Kami prioritaskan kejelasan & tindakan nyata.</p>
       </aside>
