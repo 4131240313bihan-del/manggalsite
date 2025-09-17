@@ -1,109 +1,610 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>University Information & Public Services</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Manggala Angkatan — Class of '24 (Refined)</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* --------------------------
+       VARIABLES & RESET
+       -------------------------- */
+    :root{
+      --crimson-900: #5a0303;
+      --crimson-700: #9b1f1f;
+      --gold: #efc24a;
+      --ivory: #fbf7f3;
+      --card: #ffffff;
+      --muted: #7a7a7a;
+      --glass: rgba(255,255,255,0.06);
+      --radius: 16px;
+      --shadow-soft: 0 12px 40px rgba(12,12,12,0.12);
+      --shadow-strong: 0 30px 80px rgba(10,10,10,0.20);
+      --ease: cubic-bezier(.2,.9,.25,1);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(154,107,35,0.03), transparent 8%),
+                  linear-gradient(180deg,#fbf7f3,#f3efe9);
+      color:#222;line-height:1.45;-webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      -webkit-font-kerning:normal;padding-bottom:80px;
+    }
+    img{display:block;max-width:100%}
+    a{color:inherit}
+
+    /* --------------------------
+       LAYOUT WRAPPER
+       -------------------------- */
+    .wrap{max-width:1180px;margin:34px auto;padding:0 20px}
+
+    /* --------------------------
+       NAVBAR (thin, elegant)
+       -------------------------- */
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:10px;border-radius:14px;background:linear-gradient(90deg,var(--crimson-900),var(--crimson-700));
+      color:#fff;box-shadow:var(--shadow-soft);backdrop-filter: blur(6px);
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:46px;height:46px;border-radius:50%;border:2px solid rgba(255,255,255,0.12);object-fit:cover}
+    .brand .title{font-family:"Merriweather",serif;font-weight:900;letter-spacing:0.6px}
+    .nav .links{display:flex;gap:14px;align-items:center}
+    .nav .links a{padding:8px 12px;border-radius:10px;font-weight:600;opacity:.95;transition:all .18s var(--ease)}
+    .nav .links a:hover{transform:translateY(-3px);background:rgba(255,255,255,0.04)}
+    .nav .cta{background:var(--gold);color:var(--crimson-900);padding:9px 16px;border-radius:999px;font-weight:700;box-shadow:0 10px 30px rgba(239,194,74,0.12)}
+
+    /* --------------------------
+       HERO: minimal text + emblem
+       -------------------------- */
+    .hero{
+      margin-top:22px;border-radius:20px;overflow:visible;padding:28px;
+      display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;
+      background:
+        linear-gradient(180deg, rgba(90,3,3,0.18), rgba(155,31,31,0.08)),
+        url("Assets/hero.jpg") center/cover no-repeat;
+      color:#fff;box-shadow:var(--shadow-strong);position:relative;
+    }
+
+    /* decorative, symbolic corner */
+    .hero::before{
+      content:"";position:absolute;left:-60px;top:-60px;width:280px;height:280px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, rgba(239,194,74,0.06), transparent 30%);
+      transform:rotate(12deg);pointer-events:none;opacity:.8;
+    }
+
+    .hero-left{padding-right:6px}
+    .hero h1{font-family:"Merriweather",serif;font-size:2.4rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+    .hero p{opacity:.95;color:rgba(255,255,255,0.92);margin-bottom:14px;max-width:56ch}
+
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;font-weight:700;border:0;cursor:pointer;transition:transform .18s var(--ease),box-shadow .18s var(--ease);
+    }
+    .btn-light{background:rgba(255,255,255,0.12);color:#fff}
+    .btn-gold{background:var(--gold);color:var(--crimson-900)}
+    .btn:active{transform:translateY(1px)}
+    .btn:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,0.16)}
+
+    /* hero emblem card (3D tilt + ring animation) */
+    .emblem-wrap{display:flex;align-items:center;justify-content:center;min-height:260px}
+    .emblem{
+      width:300px;height:300px;border-radius:999px;position:relative;overflow:visible;
+      display:grid;place-items:center;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      box-shadow: 0 18px 40px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.02);
+      transform-style:preserve-3d;transition:transform .18s var(--ease);
+      cursor:grab;
+    }
+    .emblem .disc{
+      width:84%;height:84%;border-radius:50%;overflow:hidden;background:#fff;display:grid;place-items:center;position:relative;z-index:3;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      transform:translateZ(24px);
+    }
+    .emblem .disc img{width:86%;height:86%;object-fit:contain;filter:contrast(1.02) saturate(.96)}
+    /* gold animated ring (SVG) */
+    .emblem svg{position:absolute;left:0;top:0;width:100%;height:100%;z-index:2;pointer-events:none}
+    .ring-stroke{stroke:var(--gold);stroke-width:6;fill:none;stroke-linecap:round;filter:drop-shadow(0 8px 14px rgba(239,194,74,0.12))}
+    .ring-anim{stroke-dasharray:880;stroke-dashoffset:880;animation:ringDraw 2.2s var(--ease) forwards 0.35s}
+    @keyframes ringDraw{to{stroke-dashoffset:0}}
+
+    /* subtle glow pulse */
+    .emblem::after{content:"";position:absolute;inset:-8px;border-radius:999px;background:radial-gradient(circle at 30% 30%, rgba(239,194,74,0.06), transparent 30%);z-index:1;opacity:.9}
+
+    /* small descriptor under emblem */
+    .emblem-caption{text-align:center;margin-top:10px;color:rgba(255,255,255,0.92);font-weight:600}
+
+    /* --------------------------
+       SERVICES: refined element cards
+       -------------------------- */
+    section{margin-top:28px}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:12px}
+    .section-head h2{font-family:"Merriweather",serif;color:var(--crimson-900);letter-spacing:1px;font-size:1.45rem}
+    .section-sub{color:var(--muted);font-weight:600}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{
+      border-radius:14px;overflow:hidden;position:relative;min-height:170px;background:linear-gradient(180deg,#ffffff,#fbfbfb);
+      box-shadow:var(--shadow-soft);transition:transform .28s var(--ease),box-shadow .28s var(--ease);
+      display:flex;align-items:flex-end;padding:18px;cursor:pointer;
+    }
+    .card .bg{
+      position:absolute;inset:0;background-size:cover;background-position:center;filter:contrast(.9) saturate(.9);
+      transform:scale(1.06);transition:transform .6s var(--ease);
+    }
+    .card::before{
+      content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,5,0.08),rgba(5,5,5,0.36));opacity:0;transition:opacity .28s var(--ease);
+    }
+    .card .info{position:relative;z-index:3;color:#fff;display:flex;flex-direction:column;gap:6px}
+    .card h3{font-family:"Merriweather",serif;font-size:1.05rem}
+    .card p{font-size:.92rem;opacity:.95}
+    .card .actions{display:flex;gap:8px;margin-top:8px}
+    .card .chip{background:rgba(255,255,255,0.12);padding:6px 10px;border-radius:999px;font-weight:700}
+
+    /* subtle icon badge (svg circle) */
+    .badge{
+      position:absolute;right:14px;top:14px;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
+      z-index:4;box-shadow:0 8px 20px rgba(0,0,0,0.12)
+    }
+    /* card hover */
+    .card:hover{transform:translateY(-12px);box-shadow:var(--shadow-strong)}
+    .card:hover .bg{transform:scale(1.12)}
+    .card:hover::before{opacity:1}
+
+    /* replace text with small reveal panel */
+    .reveal{
+      position:absolute;inset:0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.6));
+      color:#fff;padding:18px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;justify-content:center;opacity:0;transform:translateY(8px);
+      transition:opacity .28s var(--ease),transform .28s var(--ease);
+      z-index:5;
+      pointer-events:none;
+    }
+    .card:focus-within .reveal, .card[data-open="true"] .reveal, .card:hover .reveal{opacity:1;transform:translateY(0);pointer-events:auto}
+    .card .reveal p{font-size:.95rem;max-width:38ch}
+
+    /* APPLY background images to cards */
+    #MKN .bg{background-image:url("Assets/ProfilMKN.jpg")}
+    #ASP .bg{background-image:url("Assets/ProfilASP.jpg")}
+    #MAP .bg{background-image:url("Assets/ProfilMAP.jpg")}
+
+    /* --------------------------
+       STATS - circular counters
+       -------------------------- */
+    .stats{display:flex;gap:18px;margin-top:20px}
+    .stat-card{flex:1;padding:18px;border-radius:14px;background:linear-gradient(180deg,#fff,#fdfcfb);box-shadow:var(--shadow-soft);display:flex;gap:12px;align-items:center}
+    .radial{width:84px;height:84px;position:relative}
+    .radial svg{transform:rotate(-90deg)}
+    .radial strong{position:absolute;inset:0;display:grid;place-items:center;font-size:1.05rem;font-weight:800;color:var(--crimson-700)}
+
+    /* --------------------------
+       CONTACT FAB + MODAL
+       -------------------------- */
+    .fab{position:fixed;right:24px;bottom:24px;background:var(--crimson-700);color:#fff;padding:12px 14px;border-radius:999px;box-shadow:0 18px 50px rgba(0,0,0,0.28);z-index:1400;border:0;cursor:pointer;font-weight:700}
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(6,6,6,0.5);z-index:1500}
+    .modal.open{display:flex}
+    .panel{width:min(920px,94%);background:#fff;border-radius:12px;overflow:hidden;display:grid;grid-template-columns:1fr 360px;box-shadow:var(--shadow-strong)}
+    .panel .left{padding:18px}
+    .panel .right{background:linear-gradient(180deg,var(--crimson-900),var(--crimson-700));color:#fff;padding:22px;display:flex;flex-direction:column;gap:12px}
+    .close{position:absolute;right:18px;top:16px;border:0;background:transparent;color:#fff;font-weight:700;padding:8px;cursor:pointer}
+
+    /* footer */
+    footer{margin-top:34px;padding:22px;text-align:center;color:var(--muted);font-size:.95rem}
+
+    /* --------------------------
+       RESPONSIVE
+       -------------------------- */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr 320px;padding:20px}
+      .emblem{width:260px;height:260px}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:640px){
+      .nav{flex-direction:column;align-items:flex-start}
+      .hero{grid-template-columns:1fr;padding:18px}
+      .emblem-wrap{order:-1;margin-bottom:8px;justify-content:flex-start}
+      .grid{grid-template-columns:1fr}
+      .panel{grid-template-columns:1fr}
+      .hero p{display:none} /* reduce text on very small */
+    }
+
+    /* small utility */
+    .muted{color:var(--muted)}
+    .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  </style>
 </head>
 <body>
+  <div class="wrap">
 
-  <!-- Header / Navigation -->
-  <!-- Hero Carousel -->
-  <section class="hero">
-    <div class="hero-carousel" id="hero-carousel">
-      <div class="hero-slide active" style="background-image: url('assets/hero1.jpg');">
-        <div class="overlay"></div>
-        <div class="hero-content">
-          <h1>Information & Public Services</h1>
-          <p>Your gateway to resources, updates, and community engagement.</p>
+    <!-- NAV -->
+    <header class="nav" role="banner" aria-label="Main">
+      <div class="brand">
+        <img src="Assets/logomanggala.jpg" alt="Manggala logo">
+        <div>
+          <div class="title">Manggala Angkatan</div>
+          <div style="font-size:12px;opacity:.95">Class of 24</div>
         </div>
       </div>
-      <div class="hero-slide" style="background-image: url('assets/hero2.jpg');">
-        <div class="overlay"></div>
-        <div class="hero-content">
-          <h1>Student-Centered</h1>
-          <p>Supporting academic and personal growth with inclusive services.</p>
+
+      <nav class="links" role="navigation" aria-label="Primary links">
+        <a href="#beranda">Beranda</a>
+        <a href="#layanan">Layanan</a>
+        <a href="#informasi">Informasi</a>
+        <a class="cta" href="#kontak">Gabung</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <main id="beranda" class="hero" aria-labelledby="hero-title">
+      <div class="hero-left">
+        <h1 id="hero-title">Manggala — Gerak & Kehormatan</h1>
+        <p>Simbol kita adalah lingkaran kekuatan — sedikit kata, banyak makna. Portal ini kuat secara visual, ringkas secara informasi.</p>
+
+        <div class="hero-actions" role="toolbar" aria-label="Hero actions">
+          <button class="btn btn-gold" id="jump-services">Lihat Layanan</button>
+          <button class="btn btn-light" id="preview-symbol">Tinjau Simbol</button>
+          <a class="btn btn-light" href="#informasi" role="link">Info Singkat</a>
+        </div>
+
+        <!-- small visual stats row -->
+        <div style="display:flex;gap:10px;margin-top:18px">
+          <div style="background:rgba(255,255,255,0.04);padding:8px 12px;border-radius:10px;color:#fff;font-weight:700">750+ Anggota</div>
+          <div style="background:rgba(255,255,255,0.04);padding:8px 12px;border-radius:10px;color:#fff;font-weight:700">25 Kegiatan</div>
         </div>
       </div>
-      <div class="hero-slide" style="background-image: url('assets/hero3.jpg');">
-        <div class="overlay"></div>
-        <div class="hero-content">
-          <h1>Community Driven</h1>
-          <p>Connecting education with society for shared progress.</p>
+
+      <!-- emblem with tilt/parallax -->
+      <div class="emblem-wrap" aria-hidden="false">
+        <div class="emblem" id="emblem" tabindex="0" aria-label="Simbol Manggala (interaktif)">
+          <div class="disc" role="img" aria-label="Logomanggala">
+            <img src="Assets/logomanggala.jpg" alt="Simbol Manggala">
+          </div>
+          <!-- SVG ring -->
+          <svg viewBox="0 0 220 220" aria-hidden="true" focusable="false">
+            <circle cx="110" cy="110" r="98" class="ring-stroke ring-anim"></circle>
+            <circle cx="110" cy="110" r="70" stroke="rgba(255,255,255,0.06)" stroke-width="1" fill="none"></circle>
+          </svg>
+        </div>
+        <div class="emblem-caption">Simbol Harimau Melingkar — keberanian & kebersamaan</div>
+      </div>
+    </main>
+
+    <!-- SERVICES -->
+    <section id="layanan" aria-labelledby="layanan-title">
+      <div class="section-head">
+        <h2 id="layanan-title">Layanan Inti</h2>
+        <div class="section-sub muted">Klik kartu untuk membuka detail — less text, more visuals.</div>
+      </div>
+
+      <div class="grid service-cards" role="list">
+        <!-- card 1 -->
+        <article class="card" id="MKN" tabindex="0" role="listitem" aria-label="Manajemen Keuangan">
+          <div class="bg" aria-hidden="true"></div>
+          <div class="badge" aria-hidden="true">
+            <!-- simple icon -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M6 11h12M8 15h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+
+          <div class="info">
+            <h3>Manajemen Keuangan</h3>
+            <p class="muted">Pengumuman & administrasi biaya</p>
+            <div class="actions">
+              <span class="chip">Info</span>
+              <button class="btn btn-light open-detail" aria-haspopup="true" aria-expanded="false">Buka</button>
+            </div>
+          </div>
+
+          <div class="reveal" aria-hidden="true">
+            <h3>Manajemen Keuangan Negara</h3>
+            <p>Pusat pengumuman akademik & panduan administrasi. Klik "Buka" untuk dokumen, pengumuman dan form.</p>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-gold" data-action="open" data-target="MKN">Buka Layanan</button>
+              <button class="btn btn-light" data-action="download">Dokumen</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- card 2 -->
+        <article class="card" id="ASP" tabindex="0" role="listitem" aria-label="Akuntansi Sektor Publik">
+          <div class="bg" aria-hidden="true"></div>
+          <div class="badge" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M6 6h.01M6 18h.01M12 6h.01M12 18h.01M18 6h.01M18 18h.01" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+
+          <div class="info">
+            <h3>Akuntansi Publik</h3>
+            <p class="muted">Saluran komunikasi & forum</p>
+            <div class="actions">
+              <span class="chip">Komunikasi</span>
+              <button class="btn btn-light open-detail" aria-haspopup="true" aria-expanded="false">Buka</button>
+            </div>
+          </div>
+
+          <div class="reveal" aria-hidden="true">
+            <h3>Akuntansi Sektor Publik</h3>
+            <p>Forum resmi, kanal diskusi, dan log aktivitas. Tersedia channel pendaftaran & arsip.</p>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-gold" data-action="open" data-target="ASP">Masuk Channel</button>
+              <button class="btn btn-light" data-action="docs">Unduh</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- card 3 -->
+        <article class="card" id="MAP" tabindex="0" role="listitem" aria-label="Manajemen Aset Publik">
+          <div class="bg" aria-hidden="true"></div>
+          <div class="badge" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7h16v10H4zM8 11h8" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+
+          <div class="info">
+            <h3>Manajemen Aset</h3>
+            <p class="muted">Inventaris & logistik</p>
+            <div class="actions">
+              <span class="chip">Pelayanan</span>
+              <button class="btn btn-light open-detail" aria-haspopup="true" aria-expanded="false">Buka</button>
+            </div>
+          </div>
+
+          <div class="reveal" aria-hidden="true">
+            <h3>Manajemen Aset Publik</h3>
+            <p>Inventaris, permintaan logistik, dan dukungan administrasi untuk kegiatan angkatan.</p>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-gold" data-action="open" data-target="MAP">Ajukan Permintaan</button>
+              <button class="btn btn-light" data-action="forms">Form</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section style="margin-top:18px">
+      <div class="stats">
+        <div class="stat-card">
+          <div class="radial" aria-hidden="true">
+            <svg viewBox="0 0 36 36" width="84" height="84">
+              <path d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32" fill="none" stroke="#eee" stroke-width="3"></path>
+              <path id="stroke1" d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32" fill="none" stroke="url(#grad1)" stroke-width="3" stroke-dasharray="85" stroke-dashoffset="25"></path>
+              <defs>
+                <linearGradient id="grad1" x1="0" x2="1">
+                  <stop offset="0" stop-color="var(--gold)"/>
+                  <stop offset="1" stop-color="var(--crimson-700)"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <strong style="font-size:1rem;color:var(--crimson-700)">750+</strong>
+          </div>
+          <div>
+            <div style="font-weight:700;color:var(--crimson-700)">Anggota Aktif</div>
+            <div class="muted">Terdaftar & aktif berpartisipasi</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="radial" aria-hidden="true">
+            <svg viewBox="0 0 36 36" width="84" height="84">
+              <path d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32" fill="none" stroke="#eee" stroke-width="3"></path>
+              <path id="stroke2" d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32" fill="none" stroke="url(#grad2)" stroke-width="3" stroke-dasharray="85" stroke-dashoffset="40"></path>
+              <defs>
+                <linearGradient id="grad2" x1="0" x2="1">
+                  <stop offset="0" stop-color="var(--gold)"/>
+                  <stop offset="1" stop-color="var(--crimson-700)"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <strong style="font-size:1rem;color:var(--crimson-700)">25+</strong>
+          </div>
+          <div>
+            <div style="font-weight:700;color:var(--crimson-700)">Kegiatan / Tahun</div>
+            <div class="muted">Workshop, pelatihan & acara sosial</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="radial" aria-hidden="true">
+            <svg viewBox="0 0 36 36" width="84" height="84">
+              <path d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32" fill="none" stroke="#eee" stroke-width="3"></path>
+              <path id="stroke3" d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32" fill="none" stroke="url(#grad3)" stroke-width="3" stroke-dasharray="85" stroke-dashoffset="10"></path>
+              <defs>
+                <linearGradient id="grad3" x1="0" x2="1">
+                  <stop offset="0" stop-color="var(--gold)"/>
+                  <stop offset="1" stop-color="var(--crimson-700)"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <strong style="font-size:1rem;color:var(--crimson-700)">100%</strong>
+          </div>
+          <div>
+            <div style="font-weight:700;color:var(--crimson-700)">Komitmen</div>
+            <div class="muted">Nilai & tindakan bersama</div>
+          </div>
         </div>
       </div>
+    </section>
+
+    <!-- INFORMATION -->
+    <section id="informasi" style="margin-top:22px">
+      <div class="section-head"><h2>Informasi</h2></div>
+      <div class="grid info-cards" style="grid-template-columns:repeat(3,1fr)">
+        <div class="card info-card" tabindex="0"><div style="padding:14px"><h3 style="color:var(--crimson-700)">Pengumuman</h3><div class="muted">Jadwal & pengumuman resmi</div></div></div>
+        <div class="card info-card" tabindex="0"><div style="padding:14px"><h3 style="color:var(--crimson-700)">Kegiatan</h3><div class="muted">Rundown & relawan</div></div></div>
+        <div class="card info-card" tabindex="0"><div style="padding:14px"><h3 style="color:var(--crimson-700)">Prestasi</h3><div class="muted">Spotlight & beasiswa</div></div></div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      &copy; 2025 Manggala Angkatan — Class of '24 • Visual-first, symbolic design.
+    </footer>
+  </div>
+
+  <!-- FAB contact -->
+  <button class="fab" id="fab" aria-haspopup="dialog" aria-controls="contact-modal">Hubungi</button>
+
+  <!-- modal -->
+  <div class="modal" id="contact-modal" role="dialog" aria-hidden="true" aria-labelledby="contact-title">
+    <div class="panel" role="document">
+      <div class="left">
+        <div style="padding:18px 18px 6px">
+          <h3 id="contact-title" style="margin-bottom:6px">Hubungi Tim Manggala</h3>
+          <p class="muted" style="margin-bottom:12px">Kirim pesan singkat — kami akan merespons pada jam kerja.</p>
+        </div>
+        <form style="padding:0 18px 18px" id="contact-form">
+          <div style="display:grid;gap:8px">
+            <input name="name" placeholder="Nama" required style="padding:10px;border-radius:10px;border:1px solid #eee">
+            <input type="email" name="email" placeholder="Email" required style="padding:10px;border-radius:10px;border:1px solid #eee">
+            <textarea name="message" placeholder="Pesan Anda" rows="6" style="padding:10px;border-radius:10px;border:1px solid #eee"></textarea>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-gold" type="submit">Kirim</button>
+              <button class="btn btn-light" type="button" id="modal-close">Tutup</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <aside class="right" style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center">
+        <div style="width:160px;height:160px;border-radius:160px;background:rgba(255,255,255,0.06);display:grid;place-items:center">
+          <img src="Assets/logomanggala.jpg" alt="logo" style="width:88px">
+        </div>
+        <p style="opacity:.9;margin-top:10px;color:#fff">Kami prioritaskan kejelasan & tindakan nyata.</p>
+      </aside>
     </div>
-  </section>
+  </div>
 
-  <!-- About -->
-  <section id="about" class="section">
-    <h2>About the University</h2>
-    <p>
-      The University of Excellence is dedicated to advancing knowledge through quality education, 
-      research, and public service. Our institution fosters innovation, leadership, and community engagement 
-      while preparing students to excel in a global society.
-    </p>
-  </section>
+  <script>
+    /* ===========================
+       Interactions: emblem tilt, card reveal, modal, reveals
+       =========================== */
 
-  <!-- Services -->
-  <section id="services" class="section">
-    <h2>Public Services</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Student Affairs</h3>
-        <p>Enrollment, counseling, academic support, and extracurricular engagement.</p>
-      </div>
-      <div class="card">
-        <h3>Library & Research</h3>
-        <p>Access digital resources, journals, and collaborative research opportunities.</p>
-      </div>
-      <div class="card">
-        <h3>Community Programs</h3>
-        <p>Workshops, partnerships, and outreach initiatives to benefit society.</p>
-      </div>
-      <div class="card">
-        <h3>Health & Wellness</h3>
-        <p>Comprehensive medical care, mental health support, and fitness programs.</p>
-      </div>
-    </div>
-  </section>
+    // Emblem 3D tilt / parallax
+    (function emblemTilt(){
+      const emblem = document.getElementById('emblem');
+      if(!emblem) return;
+      let rect = emblem.getBoundingClientRect();
+      let lX=0,lY=0,raf=0;
+      function updateTransform(){
+        emblem.style.transform = `perspective(900px) rotateX(${lY}deg) rotateY(${lX}deg) translateZ(4px)`;
+        raf = 0;
+      }
+      emblem.addEventListener('mousemove', (e)=>{
+        rect = emblem.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+        lX = (px - 0.5) * 12; // rotateY
+        lY = -(py - 0.5) * 10; // rotateX
+        if(!raf) raf = requestAnimationFrame(updateTransform);
+      });
+      ['mouseleave','blur'].forEach(ev => emblem.addEventListener(ev, ()=>{
+        lX = 0; lY = 0; if(!raf) raf = requestAnimationFrame(updateTransform);
+      }));
+      // keyboard tiny animation
+      emblem.addEventListener('focus', ()=> emblem.animate([{transform: 'scale(1)'},{transform:'scale(1.02)'},{transform:'scale(1)'}],{duration:600}));
+    })();
 
-  <!-- Notices -->
-  <section id="notices" class="section">
-    <h2>Latest Notices</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Academic Calendar 2025</h3>
-        <p>Review the updated semester schedule, including exams and holidays.</p>
-      </div>
-      <div class="card">
-        <h3>Scholarship Opportunities</h3>
-        <p>Applications for 2025–2026 scholarships are open until June 30, 2025.</p>
-      </div>
-      <div class="card">
-        <h3>Public Lecture Series</h3>
-        <p>Join monthly seminars featuring distinguished speakers from diverse fields.</p>
-      </div>
-    </div>
-  </section>
+    // Smooth scroll
+    document.getElementById('jump-services').addEventListener('click', ()=> document.getElementById('layanan').scrollIntoView({behavior:'smooth'}));
 
-  <!-- Contact -->
-  <section id="contact" class="section">
-    <h2>Contact Information</h2>
-    <p>
-      📍 123 University Avenue, City, Country <br>
-      📧 info@university.edu <br>
-      ☎️ +123-456-7890
-    </p>
-  </section>
+    // card "open detail" buttons toggle data-open
+    document.querySelectorAll('.card').forEach(card => {
+      const btn = card.querySelector('.open-detail');
+      btn && btn.addEventListener('click', (e) => {
+        const isOpen = card.getAttribute('data-open') === 'true';
+        card.setAttribute('data-open', !isOpen);
+        btn.setAttribute('aria-expanded', String(!isOpen));
+      });
+      // keyboard open on Enter
+      card.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          const isOpen = card.getAttribute('data-open') === 'true';
+          card.setAttribute('data-open', !isOpen);
+        }
+      });
+    });
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 University of Excellence. All Rights Reserved. | <a href="#contact">Contact Us</a></p>
-  </footer>
+    // subtle reveal on scroll
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if(en.isIntersecting) en.target.style.transform = 'translateY(0)', en.target.style.opacity = 1, io.unobserve(en.target);
+      });
+    }, {threshold:0.12});
+    document.querySelectorAll('.card, .info-card, .stat-card').forEach((el,i)=>{
+      el.style.transform = 'translateY(10px)'; el.style.opacity = 0;
+      io.observe(el);
+      el.style.transition = 'transform .8s var(--ease) '+(i*60)+'ms, opacity .6s var(--ease) '+(i*60)+'ms';
+    });
 
-  <script src="script.js"></script>
+    // modal open/close (fab)
+    const fab = document.getElementById('fab');
+    const modal = document.getElementById('contact-modal');
+    const modalClose = document.getElementById('modal-close');
+    const contactForm = document.getElementById('contact-form');
+    fab.addEventListener('click', ()=> {
+      modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+      // focus first input
+      setTimeout(()=> modal.querySelector('input')?.focus(),120);
+    });
+    modalClose.addEventListener('click', closeModal);
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=> { if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e)=> { if(e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+    function closeModal(){
+      modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
+      fab.focus();
+    }
+
+    // contact form (demo)
+    contactForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const btn = contactForm.querySelector('button[type="submit"]');
+      const original = btn.textContent;
+      btn.textContent = 'Mengirim...';
+      btn.disabled = true;
+      setTimeout(()=> {
+        btn.textContent = 'Terkirim ✓';
+        contactForm.reset();
+        setTimeout(()=> { btn.textContent = original; btn.disabled = false; closeModal(); }, 900);
+      }, 900);
+    });
+
+    // "preview symbol" shows emblem modal (tiny)
+    document.getElementById('preview-symbol').addEventListener('click', ()=>{
+      // quick enlarge effect: clone emblem into lightbox
+      const emblem = document.getElementById('emblem');
+      const img = emblem.querySelector('img').src;
+      const panel = document.createElement('div');
+      panel.style.position='fixed';panel.style.inset=0;panel.style.display='grid';panel.style.placeItems='center';
+      panel.style.background='rgba(8,8,8,0.7)';panel.style.zIndex=1800;panel.style.cursor='zoom-out';
+      const box = document.createElement('div');box.style.width='min(86vw,720px)';box.style.borderRadius='18px';box.style.padding='22px';box.style.background='linear-gradient(180deg,#fff,#fbfbfb)';
+      const el = document.createElement('img');el.src=img;el.style.maxWidth='100%';el.style.display='block';
+      box.appendChild(el);panel.appendChild(box);document.body.appendChild(panel);
+      panel.addEventListener('click', ()=> panel.remove());
+    });
+
+    // card action handlers (demo)
+    document.querySelectorAll('[data-action]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const action = btn.dataset.action;
+        const target = btn.dataset.target || '';
+        if(action === 'open') alert('Membuka layanan: ' + (target || '—'));
+        else if(action === 'download' || action === 'docs' || action === 'forms') alert('Mengunduh / membuka dokumen terkait.');
+      });
+    });
+
+    // small finish: animate radial strokes (visual)
+    setTimeout(()=>{
+      document.getElementById('stroke1').style.transition='stroke-dashoffset 1.1s cubic-bezier(.2,.9,.3,1)';
+      document.getElementById('stroke1').style.strokeDashoffset = '0';
+      document.getElementById('stroke2').style.transition='stroke-dashoffset 1.2s cubic-bezier(.2,.9,.3,1)';
+      document.getElementById('stroke2').style.strokeDashoffset = '0';
+      document.getElementById('stroke3').style.transition='stroke-dashoffset 1.3s cubic-bezier(.2,.9,.3,1)';
+      document.getElementById('stroke3').style.strokeDashoffset = '0';
+    }, 450);
+
+  </script>
 </body>
 </html>
-
